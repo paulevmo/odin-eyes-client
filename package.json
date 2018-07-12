@@ -1,5 +1,6 @@
 {
-  "name": "odin-eyes",
+  "name": "odin-eyes-client",
+  "description": "Client for User Registration and Login",
   "version": "1.0.0",
   "repository": {
     "type": "git",
