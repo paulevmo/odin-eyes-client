@@ -23,7 +23,13 @@ class App extends React.Component {
     const { alert } = this.props
     return (
       <div className="container">
-        { alert.message ? <div className={`alert ${alert.type}`}>{alert.message}</div> : null }
+        { alert.message
+          ? <div className='col-xs-6 col-xs-offset-3'>
+              <div className={`alert ${alert.type}`}>{alert.message}</div>
+            </div>
+          : null
+        }
+
         <Router history={history}>
           <div>
             <PrivateRoute exact path="/" component={HomePage} />
