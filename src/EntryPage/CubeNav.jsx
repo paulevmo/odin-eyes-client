@@ -8,7 +8,7 @@ class CubeNav extends React.Component {
     this.showLogin = this.showLogin.bind(this)
     this.showSignup = this.showSignup.bind(this)
     this.showForgotPassword = this.showForgotPassword.bind(this)
-    this.showSubscribe = this.showSubscribe.bind(this)
+    this.showBrand = this.showBrand.bind(this)
     this.showContactUs = this.showContactUs.bind(this)
   }
 
@@ -28,8 +28,7 @@ class CubeNav extends React.Component {
     this.prism.style.transform = 'translateZ(-100px) rotateY( -180deg)'
   }
 
-  showSubscribe () {
-    console.log('showSubscribe')
+  showBrand () {
     this.prism.style.transform = 'translateZ(-100px) rotateX( -90deg)'
   }
 
@@ -38,7 +37,7 @@ class CubeNav extends React.Component {
   }
 
   showThankYou (){
-    // TODO: do this after a subscribe or contact us submit
+    // TODO: do this after a subscribe or contact submit
     this.prism.style.transform = 'translateZ(-100px) rotateX( 90deg)';
   }
 
@@ -48,9 +47,9 @@ class CubeNav extends React.Component {
         <ul className='nav'>
           { this.props.currentFace === 'login' ? null : <li onClick={this.showLogin}>Login</li> }
           { this.props.currentFace === 'signup' ? null : <li onClick={this.showSignup}>Sign up</li> }
-          { this.props.currentFace === 'forgot' ? null : <li onClick={this.showForgotPassword}>Forgot password</li> }
-          { this.props.currentFace === 'subscribe' ? null : <li onClick={this.showSubscribe}>Subscribe</li> }
           { this.props.currentFace === 'contact' ? null : <li onClick={this.showContactUs}>Contact</li> }
+          { this.props.currentFace === 'brand' ? null : <li onClick={this.showBrand}>Brand</li> }
+          { this.props.currentFace === 'forgot' ? null : <li onClick={this.showForgotPassword}>Forgot password</li> }
         </ul>
       </div>
     )

@@ -33,13 +33,10 @@ $gray-dark: #696b6f;
   }
 }
 
-.btn-tertiary {
-  background-color: $gold;
-  border-color: #652f1c;
-
-  &:hover {
-    background-color: #e6bb7e;
-    border-color: #652f1c;
+.entry-brand {
+  text-align: center;
+  img {
+    width: 300px;
   }
 }
 
@@ -80,14 +77,14 @@ body{
   width: $prism-length;
   height: $prism-height;
   padding: 20px;
-  background: rgba(250,250,250,0.96);
-  border: 3px solid $black;
-  border-radius: 3px;
+  background: rgba(53,56,62,0.98);
+  border: 2px solid $blue;
+  border-radius: 8px;
 
   .content{
     color: $text-dark;
     h2{
-      color: $gray-dark;
+      color: $blue;
       text-align: center;
       margin: 0 0 $spacing/3 0;
     }
@@ -233,8 +230,8 @@ body{
     display: inline-block;
     list-style-type: none;
     font-size: 1em;
-    margin: 0 18px;
-    color: $blue;
+    margin: 0 20px;
+    color: $gold;
     position: relative;
     cursor: pointer;
     &:after{
@@ -243,7 +240,7 @@ body{
       bottom: 0;
       left: 0;
       width: 20px;
-      border-bottom: 1px solid $blue;
+      border-bottom: 1px solid $gold;
       transition: all ease-in 0.25s;
     }
     &:hover:after{

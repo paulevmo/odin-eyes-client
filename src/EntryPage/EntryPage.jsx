@@ -4,6 +4,7 @@ import './entry.scss'
 import { LoginForm } from './LoginForm'
 import { SignupForm } from './SignupForm'
 import { ContactForm } from './ContactForm'
+import { Brand } from './Brand'
 
 import { userActions } from '../_actions'
 
@@ -73,13 +74,7 @@ class EntryPage extends React.Component {
             </div>
 
             <div className='face face-top'>
-              <div className='content'>
-                <h2>Subscribe</h2>
-                <small>Enter your email so we can send you the latest updates!</small>
-                <p>
-                  Placeholder for email form
-                </p>
-              </div>
+              <Brand />
             </div>
 
             <div className='face face-back'>

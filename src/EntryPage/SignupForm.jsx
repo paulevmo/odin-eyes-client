@@ -88,7 +88,7 @@ class SignupForm extends React.Component {
           <div className="form-group text-center">
             <div onClick={this.showLogin} className="btn btn-default">&larr; Login</div>
             { registering ? <img src='src/_assets/gifs/loading.gif' /> : null }
-            <button className="btn btn-success btn-tertiary">Sign Up</button>
+            <button className="btn btn-success">Sign up</button>
           </div>
         </form>
 
