@@ -1,6 +1,8 @@
 const path = require('path')
+const autoprefixer = require('autoprefixer')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UnCSSPlugin = require('uncss-webpack-plugin')
 
 module.exports = {
   entry: './src/index.jsx',
@@ -21,22 +23,31 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-3']
         }
       }, {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ["css-loader"]
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [require('autoprefixer')]
+              }
+            },
+            'sass-loader']
         })
       }
     ]
   },
   plugins: [
+    new UnCSSPlugin({ }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
       inject: 'body'
     }),
     new ExtractTextPlugin({
-      filename: "[name].css"
+      filename: '[name].css'
     })
   ],
   devServer: {
