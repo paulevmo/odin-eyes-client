@@ -4,7 +4,9 @@ import './entry.scss'
 import { LoginForm } from './LoginForm'
 import { SignupForm } from './SignupForm'
 import { ContactForm } from './ContactForm'
+import { ForgotPasswordForm } from './ForgotPasswordForm'
 import { Brand } from './Brand'
+import { Thanks } from './Thanks'
 
 import { userActions } from '../_actions'
 
@@ -78,23 +80,11 @@ class EntryPage extends React.Component {
             </div>
 
             <div className='face face-back'>
-              <div className='content'>
-                <h2>Forgot your password?</h2>
-                <small>Enter your email so we can send you a reset link for your password</small>
-                <p>
-                  Placeholder for forgot password reset form
-                </p>
-              </div>
+              <ForgotPasswordForm />
             </div>
 
-
-
             <div className='face face-bottom'>
-              <div className='content'>
-                <div className='thank-you-msg'>
-                  Thank you!
-                </div>
-              </div>
+              <Thanks />
             </div>
           </div>
         </div>
