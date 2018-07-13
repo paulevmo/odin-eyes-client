@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import './home.scss'
 
 import { userActions } from '../_actions'
 
@@ -19,6 +20,10 @@ class HomePage extends React.Component {
       <div className="col-md-6 col-md-offset-3">
         <h1>Hi {user.firstName}!</h1>
         <p>You're logged in!</p>
+
+        <div className='home-logo'>
+          <img src='/src/_assets/images/1x/logo-square.png' />
+        </div>
 
         <p>Spotify API Integration prototype still under construction...</p>
 

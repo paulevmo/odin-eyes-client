@@ -1,0 +1,19 @@
+$blue: #5bc0de;
+
+.home-logo {
+  text-align: center;
+
+  img {
+    width: 300px
+  }
+}
+
+a {
+  color: $blue;
+
+  &:hover {
+    cursor: pointer;
+    color: $blue;
+    text-decoration-color: $blue
+  }
+}

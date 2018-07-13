@@ -53,6 +53,10 @@ class LoginForm extends React.Component {
 
     return (
       <div className='content login'>
+        <div className='entry-icon'>
+          <img src='/src/_assets/images/1x/icon.png' />
+        </div>
+
         <h2>Login</h2>
         <form name='form' onSubmit={this.handleSubmit}>
           <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
