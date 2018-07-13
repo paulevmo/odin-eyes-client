@@ -1,5 +1,6 @@
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   entry: './src/index.jsx',
@@ -11,7 +12,7 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
@@ -19,14 +20,25 @@ module.exports = {
         query: {
           presets: ['react', 'es2015', 'stage-3']
         }
+      }, {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader"]
+        })
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: './src/index.html',
-    filename: 'index.html',
-    inject: 'body'
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      inject: 'body'
+    }),
+    new ExtractTextPlugin({
+      filename: "[name].css"
+    })
+  ],
   devServer: {
     historyApiFallback: true
   },
