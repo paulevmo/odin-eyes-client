@@ -117,7 +117,7 @@ class LoginPage extends React.Component {
     } = this.state
 
     return (
-      <div className='col-md-6 col-md-offset-3'>
+      <div>
         <div>
           <ul className='nav'>
             <li onClick={this.showLogin}>Login</li>
@@ -153,12 +153,12 @@ class LoginPage extends React.Component {
                     <input type='password' className='form-control' name='password' value={password} onChange={this.handleLoginChange} />
                     { submitted && !password  ? <div className='help-block'>Password is required</div> : null }
                   </div>
-                  <div className='form-group'>
-                    <button className='btn btn-primary'>Login</button>
+                  <div className='form-group text-center'>
+                    <button className='btn btn-info'>Login</button>
                     { loggingIn &&
                       <img src='data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==' />
                     }
-                    <Link to='/register' className='btn btn-link'>Register</Link>
+                    <div className='btn btn-success' onClick={this.showSignup}>Sign Up &rarr;</div>
                   </div>
                 </form>
               </div>
@@ -176,41 +176,41 @@ class LoginPage extends React.Component {
             <div className='face face-right'>
               <div className='content'>
                 <h2>Sign up</h2>
-                <form name="form" onSubmit={this.handleLoginSubmit}>
+                <form name="form" onSubmit={this.handleSignupSubmit}>
                   <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
                     <label htmlFor="firstName">First Name</label>
-                    <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleLoginChange} />
+                    <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleSignupChange} />
                     {submitted && !user.firstName &&
                       <div className="help-block">First Name is required</div>
                     }
                   </div>
                   <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
                     <label htmlFor="lastName">Last Name</label>
-                    <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleLoginChange} />
+                    <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleSignupChange} />
                     {submitted && !user.lastName &&
                       <div className="help-block">Last Name is required</div>
                     }
                   </div>
                   <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
                     <label htmlFor="username">Username</label>
-                    <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleLoginChange} />
+                    <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleSignupChange} />
                     {submitted && !user.username &&
                       <div className="help-block">Username is required</div>
                     }
                   </div>
                   <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
                     <label htmlFor="password">Password</label>
-                    <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleLoginChange} />
+                    <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleSignupChange} />
                     {submitted && !user.password &&
                       <div className="help-block">Password is required</div>
                     }
                   </div>
-                  <div className="form-group">
-                    <button className="btn btn-primary">Register</button>
+                  <div className="form-group text-center">
+                    <div onClick={this.showLogin} className="btn btn-info">&larr; Login</div>
                     {registering &&
                       <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                     }
-                    <Link to="/login" className="btn btn-link">Cancel</Link>
+                    <button className="btn btn-success">Sign Up</button>
                   </div>
                 </form>
               </div>
