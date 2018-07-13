@@ -1,5 +1,8 @@
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const autoprefixer = require('autoprefixer')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UnCSSPlugin = require('uncss-webpack-plugin')
 
 module.exports = {
   entry: './src/index.jsx',
@@ -11,7 +14,7 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
@@ -19,14 +22,34 @@ module.exports = {
         query: {
           presets: ['react', 'es2015', 'stage-3']
         }
+      }, {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [require('autoprefixer')]
+              }
+            },
+            'sass-loader']
+        })
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: './src/index.html',
-    filename: 'index.html',
-    inject: 'body'
-  })],
+  plugins: [
+    new UnCSSPlugin({ }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      inject: 'body'
+    }),
+    new ExtractTextPlugin({
+      filename: '[name].css'
+    })
+  ],
   devServer: {
     historyApiFallback: true
   },
