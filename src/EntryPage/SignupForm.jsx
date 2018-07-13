@@ -1,25 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import './entry.scss'
 
 import { userActions } from '../_actions'
 
-class RegisterPage extends React.Component {
+class SignupForm extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      submitted: false,
       user: {
         firstName: '',
         lastName: '',
         username: '',
         password: ''
       },
-      submitted: false
     }
 
+    this.showLogin = this.showLogin.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount () {
+    this.prism = document.querySelector('.rec-prism')
+  }
+  showLogin () {
+    this.prism.style.transform = 'translateZ(-100px)'
   }
 
   handleChange(event) {
@@ -45,11 +53,15 @@ class RegisterPage extends React.Component {
   }
 
   render() {
-    const { registering  } = this.props
-    const { user, submitted } = this.state
+    const {
+      submitted,
+      user,
+      registering
+    } = this.state
+
     return (
-      <div className="col-md-6 col-md-offset-3">
-        <h2>Register</h2>
+      <div className='content'>
+        <h2>Sign up</h2>
         <form name="form" onSubmit={this.handleSubmit}>
           <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
             <label htmlFor="firstName">First Name</label>
@@ -79,12 +91,10 @@ class RegisterPage extends React.Component {
               <div className="help-block">Password is required</div>
             }
           </div>
-          <div className="form-group">
-            <button className="btn btn-primary">Register</button>
-            {registering &&
-              <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            }
-            <Link to="/login" className="btn btn-link">Cancel</Link>
+          <div className="form-group text-center">
+            <div onClick={this.showLogin} className="btn btn-default">&larr; Login</div>
+            { registering ? <img src='src/_assets/gifs/loading.gif' /> : null }
+            <button className="btn btn-success">Sign Up</button>
           </div>
         </form>
       </div>
@@ -99,5 +109,4 @@ function mapStateToProps(state) {
   }
 }
 
-const connectedRegisterPage = connect(mapStateToProps)(RegisterPage)
-export { connectedRegisterPage as RegisterPage }
+export { SignupForm }
