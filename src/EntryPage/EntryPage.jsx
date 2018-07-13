@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import './entry.scss'
 import { LoginForm } from './LoginForm'
 import { SignupForm } from './SignupForm'
+import { ContactForm } from './ContactForm'
 
 import { userActions } from '../_actions'
 
@@ -67,6 +68,10 @@ class EntryPage extends React.Component {
               <LoginForm loggingIn={this.props.loggingIn} dispatch={this.props.dispatch}/>
             </div>
 
+            <div className='face face-left'>
+              <ContactForm contacted={this.props.contacted} dispatch={this.props.dispatch}/>
+            </div>
+
             <div className='face face-top'>
               <div className='content'>
                 <h2>Subscribe</h2>
@@ -88,14 +93,7 @@ class EntryPage extends React.Component {
             </div>
 
 
-            <div className='face face-left'>
-              <div className='content'>
-                <h2>Contact us</h2>
-                <p>
-                  Placeholder for contact us form
-                </p>
-              </div>
-            </div>
+
             <div className='face face-bottom'>
               <div className='content'>
                 <div className='thank-you-msg'>
@@ -113,9 +111,11 @@ class EntryPage extends React.Component {
 function mapStateToProps(state) {
   const { loggingIn } = state.authentication
   const { registering } = state.registration
+  const { contacted } = state.contact
   return {
     loggingIn,
-    registering
+    registering,
+    contacted
   }
 }
 

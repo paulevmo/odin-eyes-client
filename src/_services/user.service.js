@@ -8,7 +8,14 @@ export const userService = {
   getAll,
   getById,
   update,
-  delete: _delete
+  delete: _delete,
+  contact
+}
+
+function contact(email, subject, body) {
+  console.log('CONTACT: send an email with: ', email, subject, body)
+  //TODO: hook this up to email server
+  return new Promise ((resolve, reject) => setTimeout(resolve, 300, email))
 }
 
 function login(username, password) {

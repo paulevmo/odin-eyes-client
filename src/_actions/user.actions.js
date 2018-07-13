@@ -8,7 +8,26 @@ export const userActions = {
   logout,
   register,
   getAll,
-  delete: _delete
+  delete: _delete,
+  contact
+}
+
+function contact(email, subject, body) {
+  return dispatch => {
+    userService.contact(email, subject, body)
+      .then(
+        () => { dispatch(contactSuccess(email)) },
+        error => {
+          dispatch(failure(error.toString()))
+          dispatch(alertActions.error(error.toString()))
+        }
+      )
+  }
+
+  function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
+  function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
+  function contactSuccess(email) { return { type: userConstants.CONTACT_SUCCESS, email } }
+  function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
 function login(username, password) {

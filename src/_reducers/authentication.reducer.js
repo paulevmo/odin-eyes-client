@@ -19,6 +19,11 @@ export function authentication(state = initialState, action) {
       return {}
     case userConstants.LOGOUT:
       return {}
+    case userConstants.CONTACT_SUCCESS:
+      return {
+        contacted: true,
+        email: action.email
+      }
     default:
       return state
   }

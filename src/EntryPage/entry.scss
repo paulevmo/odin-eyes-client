@@ -252,13 +252,19 @@ body{
   }
 }
 
-.signup, .login {
+.signup, .login, .contact {
   .form-group {
     margin-bottom: 0;
   }
 
   .help-block {
     margin: 0;
+  }
+}
+
+.contact {
+  textarea {
+    height: 100px;
   }
 }
 
