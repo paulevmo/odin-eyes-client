@@ -15,13 +15,23 @@ class LoginPage extends React.Component {
     this.state = {
       username: '',
       password: '',
-      submitted: false
+      submitted: false,
+      user: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: ''
+      },
     }
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.showLogin = this.showLogin.bind(this)
+    this.handleLoginChange = this.handleLoginChange.bind(this)
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
+
     this.showSignup = this.showSignup.bind(this)
+    this.handleSignupChange = this.handleSignupChange.bind(this)
+    this.handleSignupSubmit = this.handleSignupSubmit.bind(this)
+
     this.showForgotPassword = this.showForgotPassword.bind(this)
     this.showSubscribe = this.showSubscribe.bind(this)
     this.showContactUs = this.showContactUs.bind(this)
@@ -31,12 +41,17 @@ class LoginPage extends React.Component {
     this.prism = document.querySelector('.rec-prism')
   }
 
-  handleChange(e) {
+  showLogin () {
+    console.log('showLogin. this: ', this)
+    this.prism.style.transform = 'translateZ(-100px)'
+  }
+
+  handleLoginChange(e) {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
 
-  handleSubmit(e) {
+  handleLoginSubmit(e) {
     e.preventDefault()
 
     this.setState({ submitted: true })
@@ -47,14 +62,31 @@ class LoginPage extends React.Component {
     }
   }
 
-  showLogin () {
-    console.log('showLogin. this: ', this)
-    this.prism.style.transform = 'translateZ(-100px)'
-  }
-
   showSignup () {
     console.log('showSignup')
     this.prism.style.transform = 'translateZ(-100px) rotateY( -90deg)'
+  }
+
+  handleSignupChange(event) {
+    const { name, value } = event.target
+    const { user } = this.state
+    this.setState({
+      user: {
+        ...user,
+        [name]: value
+      }
+    })
+  }
+
+  handleSignupSubmit(event) {
+    event.preventDefault()
+
+    this.setState({ submitted: true })
+    const { user } = this.state
+    const { dispatch } = this.props
+    if (user.firstName && user.lastName && user.username && user.password) {
+      dispatch(userActions.register(user))
+    }
   }
 
   showForgotPassword () {
@@ -76,7 +108,14 @@ class LoginPage extends React.Component {
 
   render() {
     const { loggingIn } = this.props
-    const { username, password, submitted } = this.state
+    const {
+      username,
+      password,
+      submitted,
+      user,
+      registering
+    } = this.state
+
     return (
       <div className='col-md-6 col-md-offset-3'>
         <div>
@@ -99,12 +138,29 @@ class LoginPage extends React.Component {
                 </p>
               </div>
             </div>
+
             <div className='face face-front'>
               <div className='content'>
-                <h2>Sign in</h2>
-                <p>
-                  Placeholder for Sign in form
-                </p>
+                <h2>Login</h2>
+                <form name='form' onSubmit={this.handleLoginSubmit}>
+                  <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
+                    <label htmlFor='username'>Username</label>
+                    <input type='text' className='form-control' name='username' value={username} onChange={this.handleLoginChange} />
+                    { submitted && !username ? <div className='help-block'>Username is required</div> : null }
+                  </div>
+                  <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
+                    <label htmlFor='password'>Password</label>
+                    <input type='password' className='form-control' name='password' value={password} onChange={this.handleLoginChange} />
+                    { submitted && !password  ? <div className='help-block'>Password is required</div> : null }
+                  </div>
+                  <div className='form-group'>
+                    <button className='btn btn-primary'>Login</button>
+                    { loggingIn &&
+                      <img src='data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==' />
+                    }
+                    <Link to='/register' className='btn btn-link'>Register</Link>
+                  </div>
+                </form>
               </div>
             </div>
             <div className='face face-back'>
@@ -116,12 +172,47 @@ class LoginPage extends React.Component {
                 </p>
               </div>
             </div>
+
             <div className='face face-right'>
               <div className='content'>
                 <h2>Sign up</h2>
-                <p>
-                  Placeholder for Sign up form
-                </p>
+                <form name="form" onSubmit={this.handleLoginSubmit}>
+                  <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
+                    <label htmlFor="firstName">First Name</label>
+                    <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleLoginChange} />
+                    {submitted && !user.firstName &&
+                      <div className="help-block">First Name is required</div>
+                    }
+                  </div>
+                  <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
+                    <label htmlFor="lastName">Last Name</label>
+                    <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleLoginChange} />
+                    {submitted && !user.lastName &&
+                      <div className="help-block">Last Name is required</div>
+                    }
+                  </div>
+                  <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
+                    <label htmlFor="username">Username</label>
+                    <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleLoginChange} />
+                    {submitted && !user.username &&
+                      <div className="help-block">Username is required</div>
+                    }
+                  </div>
+                  <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
+                    <label htmlFor="password">Password</label>
+                    <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleLoginChange} />
+                    {submitted && !user.password &&
+                      <div className="help-block">Password is required</div>
+                    }
+                  </div>
+                  <div className="form-group">
+                    <button className="btn btn-primary">Register</button>
+                    {registering &&
+                      <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    }
+                    <Link to="/login" className="btn btn-link">Cancel</Link>
+                  </div>
+                </form>
               </div>
             </div>
             <div className='face face-left'>
@@ -141,31 +232,6 @@ class LoginPage extends React.Component {
             </div>
           </div>
         </div>
-
-        <h2 className='test-class'>Login</h2>
-        <form name='form' onSubmit={this.handleSubmit}>
-          <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-            <label htmlFor='username'>Username</label>
-            <input type='text' className='form-control' name='username' value={username} onChange={this.handleChange} />
-            {submitted && !username &&
-              <div className='help-block'>Username is required</div>
-            }
-          </div>
-          <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-            <label htmlFor='password'>Password</label>
-            <input type='password' className='form-control' name='password' value={password} onChange={this.handleChange} />
-            {submitted && !password &&
-              <div className='help-block'>Password is required</div>
-            }
-          </div>
-          <div className='form-group'>
-            <button className='btn btn-primary'>Login</button>
-            {loggingIn &&
-              <img src='data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==' />
-            }
-            <Link to='/register' className='btn btn-link'>Register</Link>
-          </div>
-        </form>
       </div>
     )
   }
@@ -173,8 +239,10 @@ class LoginPage extends React.Component {
 
 function mapStateToProps(state) {
   const { loggingIn } = state.authentication
+  const { registering } = state.registration
   return {
-    loggingIn
+    loggingIn,
+    registering
   }
 }
 
