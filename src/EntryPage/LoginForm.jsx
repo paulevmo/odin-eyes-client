@@ -1,5 +1,6 @@
 import React from 'react'
 import './entry.scss'
+import { CubeNav } from './CubeNav'
 
 import { userActions } from '../_actions'
 
@@ -51,18 +52,18 @@ class LoginForm extends React.Component {
     } = this.state
 
     return (
-      <div className='content'>
+      <div className='content login'>
         <h2>Login</h2>
         <form name='form' onSubmit={this.handleSubmit}>
           <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
             <label htmlFor='username'>Username</label>
             <input type='text' className='form-control' name='username' value={username} onChange={this.handleChange} />
-            { submitted && !username ? <div className='help-block'>Username is required</div> : null }
+            <div className="help-block">{submitted && !username ? 'Username is required' : null}&nbsp;</div>
           </div>
           <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
             <label htmlFor='password'>Password</label>
             <input type='password' className='form-control' name='password' value={password} onChange={this.handleChange} />
-            { submitted && !password  ? <div className='help-block'>Password is required</div> : null }
+            <div className="help-block">{submitted && !password ? 'Password is required' : null}&nbsp;</div>
           </div>
           <div className='form-group text-center'>
             <button className='btn btn-info'>Login</button>
@@ -70,6 +71,8 @@ class LoginForm extends React.Component {
             <div className='btn btn-default' onClick={this.showSignup}>Sign Up &rarr;</div>
           </div>
         </form>
+
+        <CubeNav currentFace='login'/>
       </div>
     )
   }

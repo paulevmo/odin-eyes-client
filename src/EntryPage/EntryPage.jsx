@@ -1,10 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './entry.scss'
 import { LoginForm } from './LoginForm'
 import { SignupForm } from './SignupForm'
-
 
 import { userActions } from '../_actions'
 
@@ -15,6 +13,8 @@ class EntryPage extends React.Component {
     // reset login status
     this.props.dispatch(userActions.logout())
 
+    this.showLogin = this.showLogin.bind(this)
+    this.showSignup = this.showSignup.bind(this)
     this.showForgotPassword = this.showForgotPassword.bind(this)
     this.showSubscribe = this.showSubscribe.bind(this)
     this.showContactUs = this.showContactUs.bind(this)
@@ -22,6 +22,14 @@ class EntryPage extends React.Component {
 
   componentDidMount () {
     this.prism = document.querySelector('.rec-prism')
+  }
+
+  showLogin () {
+    this.prism.style.transform = 'translateZ(-100px)'
+  }
+
+  showSignup () {
+    this.prism.style.transform = 'translateZ(-100px) rotateY( -90deg)'
   }
 
   showForgotPassword () {
@@ -43,31 +51,20 @@ class EntryPage extends React.Component {
   }
 
   render() {
-    const {
-      loggingIn,
-      registering
-    } = this.props
-
     return (
       <div>
-        <img src='/src/_assets/images/1x/logo-rectangle.png' />
-        <div>
-          <ul className='nav'>
-            <li onClick={this.showLogin}>Login</li>
-            <li onClick={this.showSignup}>Sign up</li>
-            <li onClick={this.showForgotPassword}>Forgot password</li>
-            <li onClick={this.showSubscribe}>Subscribe</li>
-            <li onClick={this.showContactUs}>Contact</li>
-          </ul>
+        <div className='entry-logo'>
+          <img src='/src/_assets/images/1x/logo-rectangle.png' />
         </div>
+
         <div className='wrapper'>
           <div className='rec-prism'>
             <div className='face face-right'>
-              <SignupForm registering={this.props.registering} />
+              <SignupForm registering={this.props.registering} dispatch={this.props.dispatch}/>
             </div>
 
             <div className='face face-front'>
-              <LoginForm loggingIn={this.props.loggingIn}/>
+              <LoginForm loggingIn={this.props.loggingIn} dispatch={this.props.dispatch}/>
             </div>
 
             <div className='face face-top'>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './entry.scss'
+import { CubeNav } from './CubeNav'
 
 import { userActions } from '../_actions'
 
@@ -26,6 +27,7 @@ class SignupForm extends React.Component {
   componentDidMount () {
     this.prism = document.querySelector('.rec-prism')
   }
+
   showLogin () {
     this.prism.style.transform = 'translateZ(-100px)'
   }
@@ -60,43 +62,37 @@ class SignupForm extends React.Component {
     } = this.state
 
     return (
-      <div className='content'>
+      <div className='content signup'>
         <h2>Sign up</h2>
         <form name="form" onSubmit={this.handleSubmit}>
           <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
             <label htmlFor="firstName">First Name</label>
             <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} />
-            {submitted && !user.firstName &&
-              <div className="help-block">First Name is required</div>
-            }
+            <div className="help-block">{submitted && !user.firstName ? 'First Name is required' : null}&nbsp;</div>
           </div>
           <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
             <label htmlFor="lastName">Last Name</label>
             <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
-            {submitted && !user.lastName &&
-              <div className="help-block">Last Name is required</div>
-            }
+            <div className="help-block">{submitted && !user.lastName ? 'Last Name is required' : null}&nbsp;</div>
           </div>
           <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
             <label htmlFor="username">Username</label>
             <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
-            {submitted && !user.username &&
-              <div className="help-block">Username is required</div>
-            }
+            <div className="help-block">{submitted && !user.username ? 'Username is required' : null}&nbsp;</div>
           </div>
           <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
             <label htmlFor="password">Password</label>
             <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
-            {submitted && !user.password &&
-              <div className="help-block">Password is required</div>
-            }
+            <div className="help-block">{submitted && !user.password ? 'Password is required' : null}&nbsp;</div>
           </div>
           <div className="form-group text-center">
             <div onClick={this.showLogin} className="btn btn-default">&larr; Login</div>
             { registering ? <img src='src/_assets/gifs/loading.gif' /> : null }
-            <button className="btn btn-success">Sign Up</button>
+            <button className="btn btn-success btn-tertiary">Sign Up</button>
           </div>
         </form>
+
+        <CubeNav currentFace='signup'/>
       </div>
     )
   }
