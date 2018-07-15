@@ -1,1 +1,1 @@
-web: webpack-dev-server --open
+web: ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --open
