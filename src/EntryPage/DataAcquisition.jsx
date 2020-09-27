@@ -5,7 +5,7 @@ import { CubeNav } from './CubeNav'
 
 import { userActions } from '../_actions'
 
-class Mission extends React.Component {
+class DataAcquisition extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -17,26 +17,26 @@ class Mission extends React.Component {
   render() {
     return (
       <div className='content signup'>
-        <h2>Mission</h2>
+        <h2>Data Acquisition</h2>
         <p className="mission-p">
-          <img src='/src/_assets/images/empower.png' width={60} />
+          <img src='/src/_assets/images/collect.png' width={60} />
           <br />
-          Empower creation of imaginative ideas.
+          Collect publically available data from any online source.
         </p>
 
         <p className="mission-p">
-          <img src='/src/_assets/images/cultivate.png' width={60} />
+          <img src='/src/_assets/images/spider.png' width={60} />
           <br />
-          Enrich and cultivate value of existing software.
+          Traverse software applications and extract information.
         </p>
 
         <p className="mission-p">
-          <img src='/src/_assets/images/colate.png' width={60} />
+          <img src='/src/_assets/images/schedule.png' width={60} />
           <br />
-          Acquire, colate and aggregate insightful data
+          Schedule periodic and frequent collection of real-time data.
         </p>
 
-        <CubeNav currentFace='mission'/>
+        <CubeNav currentFace='data'/>
       </div>
     )
   }
@@ -49,4 +49,4 @@ function mapStateToProps(state) {
   }
 }
 
-export { Mission }
+export { DataAcquisition }

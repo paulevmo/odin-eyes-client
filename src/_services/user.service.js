@@ -12,10 +12,20 @@ export const userService = {
   contact
 }
 
-function contact(email, subject, body) {
-  console.log('CONTACT: send an email with: ', email, subject, body)
-  //TODO: hook this up to email server
-  return new Promise ((resolve, reject) => setTimeout(resolve, 300, email))
+function contact(email, body) {
+  console.log('CONTACT: send an email with: ', email, body)
+  Email.send({
+    Host : "smtp.elasticemail.com",
+    Username : "paul@odineyes.com",
+    Password : "4CA91C0635AC6F9E245BDE87A70D4390B4AC",
+    To : 'paul@odineyes.com',
+    From : 'paul@odineyes.com',
+    Subject : `From: ${email}`,
+    Body : body
+  }).then(message => {
+    console.log('message: ', message)
+  })
+  return Promise.resolve()
 }
 
 function login(username, password) {

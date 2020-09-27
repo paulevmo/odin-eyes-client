@@ -4,15 +4,20 @@ import { CubeNav } from './CubeNav'
 
 import { userActions } from '../_actions'
 
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
 class ContactForm extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       email: '',
-      subject: '',
       message: '',
-      submitted: false
+      submitted: false,
+      error: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -25,14 +30,15 @@ class ContactForm extends React.Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    console.log('nextProps: ', nextProps)
     if (nextProps.contacted) this.showThankYou()
     return true
   }
 
   handleChange(e) {
     const { name, value } = e.target
-    this.setState({ [name]: value })
+    this.setState({
+      [name]: value,
+    })
   }
 
   showThankYou () {
@@ -43,19 +49,25 @@ class ContactForm extends React.Component {
     e.preventDefault()
 
     this.setState({ submitted: true })
-    const { email, subject, body } = this.state
+    const { email, body } = this.state
     const { dispatch } = this.props
-    if (email && subject && body) {
-      dispatch(userActions.contact(email, subject, body))
+    if (email && body) {
+      dispatch(userActions.contact(email, body))
+      setState({
+        email: '',
+        message: '',
+        submitted: false,
+        error: ''
+      })
     }
   }
 
   render() {
     const {
       email,
-      subject,
       body,
-      submitted
+      submitted,
+      error
     } = this.state
 
     return (
@@ -65,12 +77,10 @@ class ContactForm extends React.Component {
           <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
             <label htmlFor='email'>Email</label>
             <input type='email' className='form-control' name='email' value={email} onChange={this.handleChange} />
-            <div className="help-block">{submitted && !email ? 'Email is required' : null}&nbsp;</div>
-          </div>
-          <div className={'form-group' + (submitted && !subject ? ' has-error' : '')}>
-            <label htmlFor='subject'>Subject</label>
-            <input type='text' className='form-control' name='subject' value={subject} onChange={this.handleChange} />
-            <div className="help-block">{submitted && !subject ? 'Subject is required' : null}&nbsp;</div>
+            <div className="help-block">
+              {submitted && !email ? 'Email is required' : null}
+              &nbsp;
+            </div>
           </div>
           <div className={'form-group' + (submitted && !body ? ' has-error' : '')}>
             <label htmlFor='body'>Body</label>

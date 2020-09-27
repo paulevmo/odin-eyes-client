@@ -5,7 +5,7 @@ import { CubeNav } from './CubeNav'
 
 import { userActions } from '../_actions'
 
-class Mission extends React.Component {
+class WebDesign extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -17,26 +17,26 @@ class Mission extends React.Component {
   render() {
     return (
       <div className='content signup'>
-        <h2>Mission</h2>
+        <h2>Web Design</h2>
         <p className="mission-p">
-          <img src='/src/_assets/images/empower.png' width={60} />
+          <img src='/src/_assets/images/moderndesign.png' width={60} />
           <br />
-          Empower creation of imaginative ideas.
+          Sleek and modern user interface design.
         </p>
 
         <p className="mission-p">
-          <img src='/src/_assets/images/cultivate.png' width={60} />
+          <img src='/src/_assets/images/intuitive.png' width={60} />
           <br />
-          Enrich and cultivate value of existing software.
+          Intuitive and seamless user expereince.
         </p>
 
         <p className="mission-p">
-          <img src='/src/_assets/images/colate.png' width={60} />
+          <img src='/src/_assets/images/feedback.png' width={60} />
           <br />
-          Acquire, colate and aggregate insightful data
+          Incremental development cycles with frequent client feedback.
         </p>
 
-        <CubeNav currentFace='mission'/>
+        <CubeNav currentFace='design'/>
       </div>
     )
   }
@@ -49,4 +49,4 @@ function mapStateToProps(state) {
   }
 }
 
-export { Mission }
+export { WebDesign }

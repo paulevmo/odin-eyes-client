@@ -13,7 +13,7 @@ $coral: #ff5751;
 $navy-blue: #42509e;
 $green: #07ad90;
 $black: #35383E;
-$blue: #5bc0de;
+$blue: #00a4d6;
 $gold: #c39357;
 $gray-main: #84878a;
 $gray-light: #afb0b1;
@@ -85,7 +85,7 @@ body{
   width: $prism-length;
   height: $prism-height;
   padding: 20px;
-  background: rgba(155,155,155,0.9);
+  background: rgba(155,155,155,0.95);
   border: 2px solid $blue;
   border-radius: 8px;
 
@@ -117,6 +117,7 @@ body{
       input[type="text"], input[type="password"], input[type="submit"], textarea{
         -webkit-appearance: none;
         appearance: none;
+        resize: none;
         &:focus{
           outline: none;
         }
@@ -185,7 +186,7 @@ body{
     height: 130px;
     text-align: center;
     font-size: 2em;
-    color: $gold;
+    color: $blue;
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -195,7 +196,7 @@ body{
       content: '';
       width: 50px;
       height: 25px;
-      border: 10px solid $gold;
+      border: 10px solid $blue;
       border-right: 0;
       border-top: 0;
       left: 50%;
@@ -233,13 +234,17 @@ body{
   padding: 0;
   position: absolute;
   bottom: 2px;
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  margin-left: -20px;
 
   li{
+    flex: 1;
     display: inline-block;
     list-style-type: none;
     text-align: center;
-    font-size: .95em;
-    margin: 10px 20px;
+    font-size: 1em;
     color: black;
     position: relative;
     cursor: pointer;
@@ -248,9 +253,9 @@ body{
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 10px;
-      border-bottom: 1px solid $gold;
-      transition: all ease-in 0.25s;
+      width: 0;
+      border-bottom: 3px solid $blue;
+      transition: all ease-in 0.5s;
     }
     &:hover:after{
       width: 100%;

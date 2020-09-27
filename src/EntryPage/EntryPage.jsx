@@ -4,8 +4,8 @@ import './entry.scss'
 import { LoginForm } from './LoginForm'
 import { Mission } from './Mission'
 import { ContactForm } from './ContactForm'
-import { ForgotPasswordForm } from './ForgotPasswordForm'
-import { Brand } from './Brand'
+import { WebDesign } from './WebDesign'
+import { DataAcquisition } from './DataAcquisition'
 import { Thanks } from './Thanks'
 
 import { userActions } from '../_actions'
@@ -76,11 +76,11 @@ class EntryPage extends React.Component {
             </div>
 
             <div className='face face-top'>
-              <Brand />
+              <DataAcquisition />
             </div>
 
             <div className='face face-back'>
-              <ForgotPasswordForm />
+              <WebDesign />
             </div>
 
             <div className='face face-bottom'>
