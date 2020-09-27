@@ -25,11 +25,11 @@ $gray-dark: #696b6f;
 
 .entry-logo {
   position: absolute;
-  left: 8px;
-  top: 16px;
+  left: 16px;
+  top: 24px;
 
   img {
-    width: 420px;
+    width: 320px;
   }
 }
 
@@ -85,12 +85,12 @@ body{
   width: $prism-length;
   height: $prism-height;
   padding: 20px;
-  background: rgba(53,56,62,0.98);
+  background: rgba(155,155,155,0.9);
   border: 2px solid $blue;
   border-radius: 8px;
 
   .content{
-    color: $text-dark;
+    color: $black;
     h2{
       color: $blue;
       text-align: center;
@@ -237,9 +237,10 @@ body{
   li{
     display: inline-block;
     list-style-type: none;
-    font-size: 1em;
-    margin: 0 20px;
-    color: $gold;
+    text-align: center;
+    font-size: .95em;
+    margin: 10px 20px;
+    color: black;
     position: relative;
     cursor: pointer;
     &:after{
@@ -247,7 +248,7 @@ body{
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 20px;
+      width: 10px;
       border-bottom: 1px solid $gold;
       transition: all ease-in 0.25s;
     }
@@ -283,4 +284,9 @@ small{
     to {
       -webkit-transform: translate(-50%, -50%) rotate(-45deg) scale(1);
     }
+}
+
+.mission-p {
+  text-align: center;
+  margin: 10px 0 20px 0;
 }

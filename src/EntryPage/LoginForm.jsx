@@ -72,7 +72,6 @@ class LoginForm extends React.Component {
           <div className='form-group text-center'>
             <button className='btn btn-info'>Login</button>
             { loggingIn ? <img src='src/_assets/gifs/loading.gif' /> : null }
-            <div className='btn btn-default' onClick={this.showSignup}>Sign up &rarr;</div>
           </div>
         </form>
 

@@ -6,9 +6,9 @@ class CubeNav extends React.Component {
     super(props)
 
     this.showLogin = this.showLogin.bind(this)
-    this.showSignup = this.showSignup.bind(this)
-    this.showForgotPassword = this.showForgotPassword.bind(this)
-    this.showBrand = this.showBrand.bind(this)
+    this.showMission = this.showMission.bind(this)
+    this.showWebDesign = this.showWebDesign.bind(this)
+    this.showDataAcquisition = this.showDataAcquisition.bind(this)
     this.showContactUs = this.showContactUs.bind(this)
   }
 
@@ -20,15 +20,15 @@ class CubeNav extends React.Component {
     this.prism.style.transform = 'translateZ(-100px)'
   }
 
-  showSignup () {
+  showMission () {
     this.prism.style.transform = 'translateZ(-100px) rotateY( -90deg)'
   }
 
-  showForgotPassword () {
+  showWebDesign () {
     this.prism.style.transform = 'translateZ(-100px) rotateY( -180deg)'
   }
 
-  showBrand () {
+  showDataAcquisition () {
     this.prism.style.transform = 'translateZ(-100px) rotateX( -90deg)'
   }
 
@@ -45,11 +45,40 @@ class CubeNav extends React.Component {
     return (
       <div>
         <ul className='nav'>
-          { this.props.currentFace === 'login' ? null : <li onClick={this.showLogin}>Login</li> }
-          { this.props.currentFace === 'signup' ? null : <li onClick={this.showSignup}>Sign up</li> }
-          { this.props.currentFace === 'contact' ? null : <li onClick={this.showContactUs}>Contact</li> }
-          { this.props.currentFace === 'brand' ? null : <li onClick={this.showBrand}>Brand</li> }
-          { this.props.currentFace === 'forgot' ? null : <li onClick={this.showForgotPassword}>Forgot password</li> }
+          { this.props.currentFace === 'login' ? null :
+            <li onClick={this.showLogin}>
+              <img src='/src/_assets/images/login.png' width={45} />
+              <br />
+              Login
+            </li> }
+          { this.props.currentFace === 'mission' ? null :
+            <li onClick={this.showMission}>
+              <img src='/src/_assets/images/mission.png' width={45} />
+              <br />
+              Mission
+            </li>
+          }
+          { this.props.currentFace === 'data' ? null :
+            <li onClick={this.showDataAcquisition}>
+              <img src='/src/_assets/images/data.png' width={45} />
+              <br />
+              Data Acquisition
+            </li>
+          }
+          { this.props.currentFace === 'design' ? null :
+            <li onClick={this.showWebDesign}>
+              <img src='/src/_assets/images/webdesign.png' width={45} />
+              <br />
+              Web Design
+            </li>
+          }
+          { this.props.currentFace === 'contact' ? null :
+            <li onClick={this.showContactUs}>
+              <img src='/src/_assets/images/email.jpg' width={45} />
+              <br />
+              Contact
+            </li>
+          }
         </ul>
       </div>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import './entry.scss'
 import { LoginForm } from './LoginForm'
-import { SignupForm } from './SignupForm'
+import { Mission } from './Mission'
 import { ContactForm } from './ContactForm'
 import { ForgotPasswordForm } from './ForgotPasswordForm'
 import { Brand } from './Brand'
@@ -58,13 +58,13 @@ class EntryPage extends React.Component {
     return (
       <div>
         <div className='entry-logo'>
-          <img src='/src/_assets/images/1x/logo-rectangle.png' />
+          <img src='/src/_assets/images/1x/text-company-description.png' />
         </div>
 
         <div className='wrapper'>
           <div className='rec-prism'>
             <div className='face face-right'>
-              <SignupForm registering={this.props.registering} dispatch={this.props.dispatch}/>
+              <Mission />
             </div>
 
             <div className='face face-front'>
